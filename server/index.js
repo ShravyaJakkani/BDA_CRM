@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/database');
 const authRoutes = require('./routes/authRoutes');
+const leadRoutes = require('./routes/leadRoutes');
 
 const app = express();
 
@@ -21,7 +22,10 @@ app.get('/', (req, res) => {
 // Auth routes
 app.use('/api/auth', authRoutes);
 
-const PORT = process.env.PORT || 5000;
+// Lead routes
+app.use('/api/leads', leadRoutes);
+
+const PORT = process.env.PORT || 7001;
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
