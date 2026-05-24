@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
 import { Plus, Edit2, Trash2, Search, Filter, X } from 'lucide-react'
 import { getLeads, createLead, updateLead, deleteLead } from '../services/leadService'
+import { useAuth } from '../context/AuthContext'
 
 const Leads = () => {
+  const { user } = useAuth()
   const [leads, setLeads] = useState([])
   const [showForm, setShowForm] = useState(false)
   const [editingLead, setEditingLead] = useState(null)
@@ -122,6 +124,8 @@ const Leads = () => {
   }
 
   const hasActiveFilters = searchTerm !== '' || statusFilter !== 'All'
+
+  const canDelete = user?.role === 'manager' || user?.role === 'admin'
 
   return (
     <div className="space-y-6">
@@ -330,12 +334,14 @@ const Leads = () => {
                         >
                           <Edit2 size={18} />
                         </button>
-                        <button
-                          onClick={() => handleDelete(lead._id)}
-                          className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-                        >
-                          <Trash2 size={18} />
-                        </button>
+                        {canDelete && (
+                          <button
+                            onClick={() => handleDelete(lead._id)}
+                            className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                          >
+                            <Trash2 size={18} />
+                          </button>
+                        )}
                       </div>
                     </td>
                   </tr>

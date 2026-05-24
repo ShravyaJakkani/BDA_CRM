@@ -1,10 +1,12 @@
 import { Link, useLocation } from 'react-router-dom'
 import { LayoutDashboard, Users, BarChart3, Menu, X } from 'lucide-react'
 import { useState } from 'react'
+import { useAuth } from '../context/AuthContext'
 
 const Sidebar = () => {
   const location = useLocation()
   const [isOpen, setIsOpen] = useState(false)
+  const { user } = useAuth()
 
   const menuItems = [
     { name: 'Dashboard', icon: LayoutDashboard, path: '/dashboard' },
@@ -13,6 +15,19 @@ const Sidebar = () => {
   ]
 
   const isActive = (path) => location.pathname === path
+
+  const getRoleDisplay = (role) => {
+    switch (role) {
+      case 'bda':
+        return 'BDA'
+      case 'manager':
+        return 'Manager'
+      case 'admin':
+        return 'Admin'
+      default:
+        return 'BDA'
+    }
+  }
 
   return (
     <>
@@ -76,11 +91,12 @@ const Sidebar = () => {
           <div className="p-4 border-t border-gray-200">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center">
-                <span className="text-indigo-600 font-semibold">U</span>
+                <span className="text-indigo-600 font-semibold">{user?.name?.charAt(0).toUpperCase() || 'U'}</span>
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-gray-900 truncate">User</p>
-                <p className="text-xs text-gray-500 truncate">user@example.com</p>
+                <p className="text-sm font-medium text-gray-900 truncate">{user?.name || 'User'}</p>
+                <p className="text-xs text-gray-500 truncate">{user?.email || 'user@example.com'}</p>
+                <p className="text-xs text-indigo-600 font-medium">Role: {getRoleDisplay(user?.role)}</p>
               </div>
             </div>
           </div>

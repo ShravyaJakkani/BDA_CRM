@@ -4,6 +4,7 @@ import Login from './pages/Login'
 import DashboardLayout from './components/DashboardLayout'
 import Dashboard from './pages/Dashboard'
 import Leads from './pages/Leads'
+import Analytics from './pages/Analytics'
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth()
@@ -35,7 +36,7 @@ function App() {
           >
             <Route index element={<Dashboard />} />
             <Route path="leads" element={<Leads />} />
-            <Route path="analytics" element={<Dashboard />} />
+            <Route path="analytics" element={<Analytics />} />
           </Route>
         </Routes>
       </Router>

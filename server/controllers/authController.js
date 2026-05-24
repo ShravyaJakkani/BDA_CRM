@@ -5,12 +5,22 @@ const User = require('../models/User');
 // Register User
 const register = async (req, res) => {
   try {
+    
     const { name, email, password } = req.body;
 
     // Check if user exists
     const userExists = await User.findOne({ email });
+    
     if (userExists) {
       return res.status(400).json({ message: 'User already exists' });
+    }
+
+    // Determine role based on email
+    let role = 'bda';
+    if (email === 'manager@company.com') {
+      role = 'manager';
+    } else if (email === 'admin@company.com') {
+      role = 'admin';
     }
 
     // Hash password
@@ -21,7 +31,8 @@ const register = async (req, res) => {
     const user = await User.create({
       name,
       email,
-      password: hashedPassword
+      password: hashedPassword,
+      role
     });
 
     // Generate token
@@ -37,7 +48,8 @@ const register = async (req, res) => {
       user: {
         id: user._id,
         name: user.name,
-        email: user.email
+        email: user.email,
+        role: user.role
       }
     });
   } catch (error) {
@@ -75,7 +87,8 @@ const login = async (req, res) => {
       user: {
         id: user._id,
         name: user.name,
-        email: user.email
+        email: user.email,
+        role: user.role
       }
     });
   } catch (error) {
