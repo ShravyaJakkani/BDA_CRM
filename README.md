@@ -198,8 +198,8 @@ Content-Type: application/json
 
 Body:
 {
-  "name": "John Doe",
-  "email": "john@example.com",
+  "name": "Sravs",
+  "email": "sravs@example.com",
   "password": "password123"
 }
 
@@ -209,8 +209,8 @@ Response:
   "token": "jwt_token_here",
   "user": {
     "id": "user_id",
-    "name": "John Doe",
-    "email": "john@example.com",
+    "name": "Sravs",
+    "email": "sravs@example.com",
     "role": "bda"
   }
 }
@@ -223,7 +223,7 @@ Content-Type: application/json
 
 Body:
 {
-  "email": "john@example.com",
+  "email": "sravs@example.com",
   "password": "password123"
 }
 
@@ -233,8 +233,8 @@ Response:
   "token": "jwt_token_here",
   "user": {
     "id": "user_id",
-    "name": "John Doe",
-    "email": "john@example.com",
+    "name": "Sravs",
+    "email": "sravs@example.com",
     "role": "bda"
   }
 }
@@ -263,10 +263,10 @@ Content-Type: application/json
 
 Body:
 {
-  "leadName": "Acme Corporation",
-  "company": "Acme Corp",
-  "email": "contact@acme.com",
-  "phone": "+1234567890",
+  "leadName": "user1",
+  "company": "ABC",
+  "email": "user@abc.com",
+  "phone": "9876543210",
   "status": "New",
   "notes": "Potential manufacturing client"
 }
@@ -281,10 +281,10 @@ Content-Type: application/json
 
 Body:
 {
-  "leadName": "Acme Corporation",
-  "company": "Acme Corp",
-  "email": "contact@acme.com",
-  "phone": "+1234567890",
+  "leadName": "user1",
+  "company": "ABC",
+  "email": "user@abc.com",
+  "phone": "9876543210",
   "status": "Contacted",
   "notes": "Initial meeting scheduled"
 }
