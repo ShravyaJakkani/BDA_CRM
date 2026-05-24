@@ -1,66 +1,21 @@
-const API_URL = '/api/leads'
-
-const getAuthHeaders = () => {
-  const token = localStorage.getItem('token')
-  return {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${token}`
-  }
-}
+import axios from './axios'
 
 export const getLeads = async () => {
-  const response = await fetch(API_URL, {
-    headers: getAuthHeaders()
-  })
-
-  if (!response.ok) {
-    const error = await response.json()
-    throw new Error(error.message || 'Failed to fetch leads')
-  }
-
-  return response.json()
+  const response = await axios.get('/leads')
+  return response.data
 }
 
 export const createLead = async (leadData) => {
-  const response = await fetch(API_URL, {
-    method: 'POST',
-    headers: getAuthHeaders(),
-    body: JSON.stringify(leadData)
-  })
-
-  if (!response.ok) {
-    const error = await response.json()
-    throw new Error(error.message || 'Failed to create lead')
-  }
-
-  return response.json()
+  const response = await axios.post('/leads', leadData)
+  return response.data
 }
 
 export const updateLead = async (id, leadData) => {
-  const response = await fetch(`${API_URL}/${id}`, {
-    method: 'PUT',
-    headers: getAuthHeaders(),
-    body: JSON.stringify(leadData)
-  })
-
-  if (!response.ok) {
-    const error = await response.json()
-    throw new Error(error.message || 'Failed to update lead')
-  }
-
-  return response.json()
+  const response = await axios.put(`/leads/${id}`, leadData)
+  return response.data
 }
 
 export const deleteLead = async (id) => {
-  const response = await fetch(`${API_URL}/${id}`, {
-    method: 'DELETE',
-    headers: getAuthHeaders()
-  })
-
-  if (!response.ok) {
-    const error = await response.json()
-    throw new Error(error.message || 'Failed to delete lead')
-  }
-
-  return response.json()
+  const response = await axios.delete(`/leads/${id}`)
+  return response.data
 }
